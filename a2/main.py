@@ -9,7 +9,10 @@ class Boat(ndb.Model):
 class BoatHandler(webapp2.RequestHandler):
     def post(self):
         boat_data = json.loads(self.request.body)
-        self.response.write(json.dumps(boat_data))
+        new_boat = Boat(ID=boat_data['ID'], name=boat_data['name'])
+        new_boat.put()
+        self.response.write(json.dumps(new_boat.to_dict()))
+
 
 class MainPage(webapp2.RequestHandler):
 
