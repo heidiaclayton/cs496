@@ -1,5 +1,14 @@
 from google.appengine.ext import ndb
 import webapp2
+import json
+
+class Boat(ndb.Model):
+    id = ndb.StringProperty(required=True)
+    name = ndb.StringProperty()
+
+class BoatHandler(webapp2.RequestHandler):
+    boat_data = json.loads(self.request.body)
+    self.response.write(json.dumps(boat_data))
 
 class MainPage(webapp2.RequestHandler):
 
