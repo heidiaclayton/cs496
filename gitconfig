@@ -1,0 +1,25 @@
+[user]
+	email = heidiaclayton@yahoo.com
+
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	dt = difftool
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[diff]
+	tool = kdiff3
+	guitool = kdiff3
+[difftool]
+	prompt = false
+[merge]
+	tool = kdiff3
+[mergetool]
+	tool = kdiff3
+[mergetool "kdiff3"]
+	trustExitCode = false
+[difftool "kdiff3"]
+	trustExitCode = false
+[core]
+	editor = vim
