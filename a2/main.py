@@ -11,7 +11,16 @@ class BoatHandler(webapp2.RequestHandler):
         boat_data = json.loads(self.request.body)
         new_boat = Boat(ID=boat_data['ID'], name=boat_data['name'])
         new_boat.put()
-        self.response.write(json.dumps(new_boat.to_dict()))
+        boat_dict = new_boat.to_dict()
+        boat_dict['self'] = '/boat/' + new_boat.key.urlsafe()
+        self.response.write(json.dumps(boat_dict))
+
+    def get(self, id=None):
+        if id:
+            boat = ndb.Key(urlsafe=id).get()
+            boat_dict = boat.to_dict()
+            boat_dict['self'] = "/fish/" + id
+            self.response.write(json.dumps(boat_dict))        
 
 
 class MainPage(webapp2.RequestHandler):
@@ -24,6 +33,7 @@ new_allowed_methods = allowed_methods.union(('PATCH',))
 webapp2.WSGIApplication.allowed_methods = new_allowed_methods
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/boat', BoatHandler)
+    ('/boat', BoatHandler),
+    (r'/boat/(.*)', BoatHandler)
 ], debug=True)
 
