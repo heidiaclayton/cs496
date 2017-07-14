@@ -1,16 +1,15 @@
 from google.appengine.ext import ndb
 import webapp2
 
-# [START main_page]
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
 	self.response.write("hello world")
-# [END main_page]
 
-# [START app]
+allowed_methods = webapp2.WSGIApplication.allowed_methods
+new_allowed_methods = allowed_methods.union(('PATCH'))
+webapp2.WSGIApplication.allowed_methods = new_allowed_methods
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/sign', Guestbook),
+    ('/', MainPage)
 ], debug=True)
-# [END app]
+
