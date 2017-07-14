@@ -3,7 +3,7 @@ import webapp2
 import json
 
 class Boat(ndb.Model):
-    id = ndb.StringProperty(required=True)
+    ID = ndb.StringProperty(required=True)
     name = ndb.StringProperty()
 
 class BoatHandler(webapp2.RequestHandler):
